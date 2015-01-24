@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html class="logged-in  old-login js no-touch history draganddrop localstorage svg fullscreen" lang="en-US" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/" xmlns="http://www.w3.org/TR/html5">
+<body class="logged-in  old-login" data-twttr-rendered="true">
+<script>
+  jQuery(function() {
+    jQuery('#club-event-js').on('click', function() {
+      Strava.Clubs.EventModal.show({
+        club_id: 13368,
+        address: "",
+        activity_type: 1,
+        private: true,
+        start_date_stamp: new Date().getTime() + 84600000,
+        date_picker_format: Strava.I18n.Locales.JQUERY_UI_DATE_PICKER_SETTINGS.dateFormat,
+        contact_id: 1789488,
+        contact_name: 'Jerome .',
+        members:[[1789488, "Jerome ."], [1386515, "Chris Meacham"], [207132, "Chris M"], [1467755, "Xavier W"]]
+      });
+    });
+  });
+</script>
+</body></html>
