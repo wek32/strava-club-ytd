@@ -152,7 +152,7 @@ def save_members_from_file_ytd_stats (user_list_csv, out_file):
         csvin = csv.reader(fin)
 
         csvout = csv.writer(fout)
-        csvout.writerow(['ID', 'Name', 'Distance', 'Elevation Gain'])
+        csvout.writerow(['id', 'Name', 'Distance', 'Elevation Gain'])
         for member in csvin:
 
             athlete = Athlete_public_html(str(member[0]))
