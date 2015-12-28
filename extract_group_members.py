@@ -19,7 +19,10 @@ def get_group_members_from_html(html_in):
                 first_char = tail.find('[[')
                 member_list = tail[first_char:last_char+2]
 
-                mem_array = eval(member_list)
+                mem_array_raw = eval(member_list)
+                mem_array = []
+                for member in mem_array_raw:
+                    mem_array.append([member[0], member[1].decode('unicode_escape').encode('utf8')])
 
                 return mem_array
     return []
@@ -39,8 +42,8 @@ if __name__ == "__main__":
     with open (out_file, 'wb') as fout:
         members = get_group_members_from_html(html_file)
         for member in members:
-            line = unicode(str(member[0])) + u',' + member[1].decode('unicode_escape') + u'\n'
-            fout.write(line.encode('utf8'))
+            line = str(member[0]) + ',' + member[1] + '\n'
+            fout.write(line)
 
     with open (out_file, 'r') as f:
         for line in f:
