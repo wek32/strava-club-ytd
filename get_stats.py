@@ -136,31 +136,15 @@ def get_athlete_list_from_file (user_list_csv):
 def save_members_ytd_stats (user_list, out_file):
     with open (out_file, 'wb') as fout:
 
-        csvout = csv.writer(fout)
-        csvout.writerow(['ID', 'Name', 'Distance(Km)', 'Elevation Gain(m)'])
+        fout.write('id,Name,Distance(Km),Elevation Gain(m)\n')
         for member in user_list:
             athlete = Athlete_public_html(str(member[0]))
             dist = athlete.get_year_distance()
             elev = athlete.get_year_elevation_gain()
-            print member[1] + "," + str(dist) + "," + str(elev)
+            line = str(member[0]) + ',' + member[1] + ',' + str(dist) + ',' + str(elev)
+            print line
 
-            csvout.writerow([member[0], member[1], dist, elev])
-
-def save_members_from_file_ytd_stats (user_list_csv, out_file):
-    with open (out_file, 'wb') as fout, open(user_list, 'rb') as fin:
-
-        csvin = csv.reader(fin)
-
-        csvout = csv.writer(fout)
-        csvout.writerow(['id', 'Name', 'Distance', 'Elevation Gain'])
-        for member in csvin:
-
-            athlete = Athlete_public_html(str(member[0]))
-            dist = athlete.get_year_distance()
-            elev = athlete.get_year_elevation_gain()
-            print member[1] + "," + str(dist) + "," + str(elev)
-
-            csvout.writerow([member[0], member[1], dist, elev])
+            fout.write(line + '\n')
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Get the year to date totals for a list of users in strava.')

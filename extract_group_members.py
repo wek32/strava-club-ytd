@@ -5,7 +5,6 @@ Strava club information is not publicly available. To get the club information
 '''
 
 from bs4 import BeautifulSoup
-import csv
 import argparse
 
 def get_group_members_from_html(html_in):
@@ -20,7 +19,10 @@ def get_group_members_from_html(html_in):
                 first_char = tail.find('[[')
                 member_list = tail[first_char:last_char+2]
 
-                mem_array = eval(member_list)
+                mem_array_raw = eval(member_list)
+                mem_array = []
+                for member in mem_array_raw:
+                    mem_array.append([member[0], member[1].decode('unicode_escape').encode('utf8')])
 
                 return mem_array
     return []
@@ -39,9 +41,9 @@ if __name__ == "__main__":
 
     with open (out_file, 'wb') as fout:
         members = get_group_members_from_html(html_file)
-        csvout = csv.writer(fout)
         for member in members:
-            csvout.writerow([member[0], member[1]])
+            line = str(member[0]) + ',' + member[1] + '\n'
+            fout.write(line)
 
     with open (out_file, 'r') as f:
         for line in f:
