@@ -69,7 +69,10 @@ class Athlete_public_html ():
                 ret_dict[key] = km
             elif key == 'Time':
                 key = 'time'
-                ret_dict[key] = td_data
+                timedata = td_data.split('h')
+                hours = int(timedata[0])
+                minutes = int(timedata[1].split('m')[0])
+                ret_dict[key] = hours + (minutes / 60.0)
             elif key == 'Elevation Gain':
                 key = 'elevation gain'
                 units = td_data[-2:]
@@ -136,12 +139,13 @@ def get_athlete_list_from_file (user_list_csv):
 def save_members_ytd_stats (user_list, out_file):
     with open (out_file, 'wb') as fout:
 
-        fout.write('id,Name,Distance(Km),Elevation Gain(m)\n')
+        fout.write('id,Name,Distance(Km),Elevation Gain(m),Time(h),\n')
         for member in user_list:
             athlete = Athlete_public_html(str(member[0]))
             dist = athlete.get_year_distance()
             elev = athlete.get_year_elevation_gain()
-            line = str(member[0]) + ',' + member[1] + ',' + str(dist) + ',' + str(elev)
+            time = athlete.get_year_time()
+            line = str(member[0]) + ',' + member[1] + ',' + str(dist) + ',' + str(elev) + ',' + str(time)
             print line
 
             fout.write(line + '\n')
