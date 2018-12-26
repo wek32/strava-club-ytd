@@ -1,3 +1,8 @@
+## Broken
+As of 2018-Dec-26 you can't use this script to retrieve the year to date totals for a list of riders. This script used the public website for each user to retrieve the data, Strava changed the public facing interface for each user breaking this script.
+
+The script extract_group_members.py works. The other two scripts (get_stats.py and get_ytd_club_stats.py) do not work for the majority of users.
+
 ## Strava Club Year to date Stats.
 
 This set of Python scripts will retrieve the year to date totals (distance and elevation gain) from the public profile page for all the athletes on a club or list.
